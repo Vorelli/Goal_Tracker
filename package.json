@@ -1,0 +1,30 @@
+{
+  "name": "goal_tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "server": "webpack-dev-server --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vorelli/Goal_Tracker.git"
+  },
+  "author": "Natale Toscano <kickalliance195@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vorelli/Goal_Tracker/issues"
+  },
+  "homepage": "https://github.com/Vorelli/Goal_Tracker#readme",
+  "devDependencies": {
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
+  },
+  "dependencies": {
+    "date-fns": "^2.8.1"
+  }
+}
