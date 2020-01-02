@@ -1,5 +1,5 @@
-import createElement from './createElement';
-const AmbitionViewerGenerator = function() {
+import createElement from './CreateElement';
+const BlockViewGenerator = function() {
     const that = this;
     that.ambitionViewerText = "<div class='ambitionViewer'> <div id='leftHalf'> <h1>Ambition Name</h1> <h4>Ambition Discription/Notes Section</h4> </div> <div id='rightHalf'> <div id='ambitionButtons'> <div class='ambitionButtons completeButton'>U</div> <div class='ambitionButtons editButton'>E</div> <div class='ambitionButtons deleteButton'>D</div> </div> <div class='statusBar ambitionStatus'> </div> <div id='ambitionDates'> <div>Started:<br></div> <div class='ambitionStartDate ambitionDate'>09/25/2019</div> <div>Completed:<br></div> <div class='ambitionCompDate ambitionDate'>10/12/2019</div> </div> </div> </div>";
 
@@ -11,4 +11,4 @@ const AmbitionViewerGenerator = function() {
     }
     return {generateAmbitionViewer};
 }
-export default AmbitionViewerGenerator;
+export default BlockViewGenerator;

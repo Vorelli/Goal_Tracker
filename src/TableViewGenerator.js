@@ -1,6 +1,6 @@
-import createElement from './createElement';
+import createElement from './CreateElement';
 
-const DetailedViewGenerator = function() {
+const TableViewGenerator = function() {
     const that = this;
     that.tableRow = new DocumentFragment();
     that.detailedViewText = "<div class='detailedView'><table><tr><td class='lineH40' id='tableTitle'>Ambition Name</td></tr><tr><td class='lineH40'>Goals</td><td>Date Started</td><td class='statusTD lineH40'>Task Status</td><td>Expected Completion</td><td>Date Completed</td><td></td></tr></table></div>"
@@ -28,4 +28,4 @@ const DetailedViewGenerator = function() {
     return {generateTable}
 }
 
-export default DetailedViewGenerator;
+export default TableViewGenerator;

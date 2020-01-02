@@ -4,7 +4,7 @@
 //  or several goals in order to accomplish it.
 //
 //  Can a goal be completed without tasks?
-import Task from './task';
+import Task from './Task';
 import {compareAsc} from 'date-fns';
 
 const Goal = function(name, desc, dateA, dateToBeC, dateC, completionStatus, tasks = []) {

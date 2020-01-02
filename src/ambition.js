@@ -1,7 +1,7 @@
 //  In order to accomplish an ambition, one or more goals must be accomplished.
 //  Perhaps notes can be written to further explain or detail an ambition. I
 //  suppose this would count as the desc?
-import Goal from './goal'
+import Goal from './Goal'
 import { eachDayOfInterval } from 'date-fns';
 
 const Ambition = function(name, desc, dateA, dateC, completionStatus, goals = []) {
