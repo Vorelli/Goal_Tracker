@@ -1,17 +1,139 @@
-.lineH40 {
-    line-height: 40px;
+
+
+@font-face {
+    font-family: Incolsolata;
+    src: url('Inconsolata-Regular.ttf');
 }
 
-body>div {
+body .noDisplay {
+    width:0px;
+    height:0px;
+    top:-10px;
+    position:relative;
+}
+
+body .simplifiedView {
+    position:relative;
+    top:-5px;
+}
+
+body {
+    line-height: unset;
+}
+
+body>#topbar, body>#sidebar, body>#content>div {
     background-color: tan;
     color:#3c3c3c;
-    width:500px;
     border: 5px solid #3c3c3c;
     font-family:Arial;
 }
 
-body div:first-child ~div {
+body #content div:first-child ~div {
     border-top:0px solid #3c3c3c;
+}
+
+#sidebar {
+    position:fixed;
+    left:0px;
+    top:0px;
+    height:100%;
+    width:60px;
+    border:0px;
+    z-index: 6;
+}
+
+#sidebar div, #sidebar div img {
+    width:40px;
+    height:40px;
+    cursor: pointer;
+    font-size:40pt;
+    color:black;
+    font-family:'Times New Roman', Times, serif;
+}
+
+#sidebar div:first-child ~ div {
+    padding-top:10px;
+    margin-bottom:10px;
+}
+
+#hamburgerIcon::after {
+    position:fixed;
+    content:'';
+    height:5px;
+    width:300px;
+    background-color: #3c3c3c;
+    top:65px;
+    left:0px;
+}
+
+#ambitionTableIcon {
+    border-top: 5px solid #3c3c3c;
+    width:60px !important;
+}
+
+#sidebar div {
+    float:left;
+    padding-left:10px;
+    margin-top:10px;
+}
+
+#hamburgerIcon {
+    margin-top:1.5px !important;
+    margin-bottom:8.5px;
+}
+
+#topbar {
+    position:fixed;
+    left:0px;
+    top:0px;
+    width:100%;
+    height:60px;
+    border:0px;
+    z-index: 5;
+    color:black !important;
+    font-size:36pt;
+}
+
+#topbar div {
+    line-height: 60px;
+}
+
+#content {
+    margin-top:65px;
+    float:left;
+}
+
+#ambitionAdder {
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+    border:0;
+}
+
+#ambitionAdder > * {
+    cursor:auto;
+}
+
+#ambitionAdder div {
+    position:fixed;
+    vertical-align: middle;
+    width:50%;
+    height:30%;
+    left: 25%;
+    top:35%;
+    background-color:tan;
+}
+
+#content {
+    border:0;
 }
 
 .ambitionViewer {
@@ -55,11 +177,12 @@ body div:first-child ~div {
 
 .statusBar{
     background-color: #676767;
-    width:100px;
+    width:100px !important;
     height:35px;
     position: relative;
     z-index: 1;
     left:12.5px;
+    display: block;
 }
 
 .statusBar::after {
@@ -86,35 +209,63 @@ body div:first-child ~div {
 #tableTitle {
     width:500px;
     font-size:22pt;
+    text-align: center;
+}
+
+table {
+    table-layout: fixed;
+}
+
+table, tbody, tr {
+    width:500px;
+}
+
+table .statusBar {
+    left:0px;
+}
+
+.detailedView .statusTD {
+    width:100px !important;
+}
+
+.goalButton {
+    float:left;
+    width:20px !important;
+}
+
+.goalButton:first-child {
+    margin-left:10px;
+}
+
+td, tr {
+    overflow:hidden;
+    vertical-align: middle;
+    text-align: center;
+    height:40px;
+    max-height: 40px;
+    font-size:10pt;
 }
 
 table tr:first-child ~tr{
     border-top: 5px solid #3c3c3c;
 }
 
-td {
-    float: left;
-    line-height: 20px;
-    width:80px;
-    text-align: center;
-    font-size:11pt;
-}
-
-td.statusTD {
-    width:100px;
-}
-
-td.statusTD .statusBar {
-    left:0;
-    top:2.5px;
-}
-
-td.goalButtons {
-    margin-left: 10px;
+#addAmbition {
+    position: relative;
+    display: block;
+    left:505px;
+    border: 5px solid #3c3c3c;
+    top:-140px;
+    outline: 0;
     width:60px;
+    font-size:32pt;
+    line-height: unset;
+    height: 60px;
+    background-color: tan;
+    font-family:Arial;
+    cursor: pointer;
 }
 
-td.goalButtons .goalButton {
-    width:20px;
-    float:left;
+#addAmbition:hover {
+    background-color: goldenrod;
 }

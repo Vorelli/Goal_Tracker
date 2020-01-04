@@ -3,8 +3,12 @@ import createElement from './CreateElement';
 const TableViewGenerator = function() {
     const that = this;
     that.tableRow = new DocumentFragment();
-    that.detailedViewText = "<div class='detailedView'><table><tr><td class='lineH40' id='tableTitle'>Ambition Name</td></tr><tr><td class='lineH40'>Goals</td><td>Date Started</td><td class='statusTD lineH40'>Task Status</td><td>Expected Completion</td><td>Date Completed</td><td></td></tr></table></div>"
-    that.tableRowText = "<tr><td class='lineH40'>Goal Name</td class='lineH40'><td class='lineH40'>10/30/2019</td class='lineH40'><td class='statusTD'><div class='statusBar'></div></td><td class='lineH40'>11/01/2019</td class='lineH40'><td class='lineH40'>10/30/2019</td class='lineH40'><td class='lineH40 goalButtons'><div class='goalButton'>U</div><div class='goalButton'>E</div><div class='goalButton'>X</div></td></tr>";
+    that.detailedViewText = "<div class='detailedView'><table><col width='80px'><col width='80px'><col width='100px'><col width='80px'><col width='80px'><col width='80px'><tr><td colspan=\"6\" class='lineH40' id='tableTitle'>Ambition Name</td></tr><tr class='headers'><td><div>Goals</div></td><td><div>Date Started</div></td><td class='statusTD'><div>Task Status</div></td><td><div>Expected Completion</div></td><td><div>Date Completed</div></td><td><div></div></td></tr></table></div"
+    that.tableRowText = "<tr><td class='lineH40'>Goal Mother Boyyo Name</td class='lineH40'><td class='lineH40'>10/30/2019</td class='lineH40'><td class='statusTD'><div class='statusBar'></div></td><td class='lineH40'>11/01/2019</td class='lineH40'><td class='lineH40'>10/30/2019</td class='lineH40'><td class='lineH40 goalButtons'><div class='goalButton'>U</div><div class='goalButton'>E</div><div class='goalButton'>X</div></td></tr>";
+
+    function generateAmbitionSimplified(ambitions) {
+
+    }
 
     function generateTable(numRows) {
         let a = new DocumentFragment()
