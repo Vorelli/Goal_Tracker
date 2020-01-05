@@ -1,5 +1,6 @@
 import { grab, grabAll, grabFrom, grabAllFrom } from "./grab";
 import {formatISO9075} from 'date-fns'
+import TableViewGenerator from './TableViewGenerator';
 
 const SimplifiedViewGenerator = function() {
     const that = this;
@@ -17,6 +18,30 @@ const SimplifiedViewGenerator = function() {
         a.classList.add('filledDot');
         return a;
     }
+
+    function _generateDetailedView(event) {
+        let row = null
+        for (let i = 0; i < event.path.length; i++) {
+            if(!!event.path[i].ambition)
+                row = event.path[i];
+        }
+        row.innerHTML = '';
+        let td = document.createElement('td');
+        td.colSpan = 4;
+        row.appendChild(td).appendChild(new TableViewGenerator().generateTable(10));
+    }
+
+    function _generateSimplifiedViewRow(element, ambition) {
+        grabFrom(element, 'tbody').insertAdjacentHTML('beforeend', dataRow);
+        let row = (grabFrom(element, '.simplifiedView tr:last-child'));
+        grabFrom(row, '.name').textContent = ambition.name;
+        grabFrom(row, '.dateStart').textContent = formatISO9075(ambition.dateA, {representation: 'date'});
+        grabFrom(row, '.dateComplete').textContent = formatISO9075(ambition.dateC, {representation: 'date'});
+        for(let j = 0; j < ambition.goals.length; j++)
+            grabFrom(row, '.statusBar').appendChild(ambition.goals[j].completionStatus ? _generateFilledDot() : _generateDot());
+        row.ambition = ambition;
+        row.addEventListener('click', _generateDetailedView);
+    }
     
     function generateSimplifiedView(ambitions) {
         let docFrag = new DocumentFragment();
@@ -24,14 +49,7 @@ const SimplifiedViewGenerator = function() {
         grabFrom(docFrag, 'body').insertAdjacentHTML('afterbegin',table);
         const a = ambitions.getData().ambitions;
         for(let i = 0; i < a.length; i++){
-            grabFrom(docFrag, 'tbody').insertAdjacentHTML('beforeend', dataRow);
-            let row = (grabFrom(docFrag, '.simplifiedView tr:last-child'));
-            grabFrom(row, '.name').textContent = a[i].name;
-            grabFrom(row, '.dateStart').textContent = formatISO9075(a[i].dateA, {representation: 'date'});
-            grabFrom(row, '.dateComplete').textContent = formatISO9075(a[i].dateC, {representation: 'date'});
-            for(let j = 0; j < a[i].goals.length; j++)
-                grabFrom(row, '.statusBar').appendChild(a[i].goals[j].completionStatus ? _generateFilledDot() : _generateDot());
-            row.ambition = a[i];
+            _generateSimplifiedViewRow(docFrag, a[i]);
         }
         let d = grabAllFrom(docFrag, 'body>div');
         for(let i = 0; i < d.length; i++){ grab('#content').appendChild(d[i]) };
