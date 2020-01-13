@@ -11,13 +11,13 @@ const Goal = function(name, desc, dateA, dateToBeC, dateC, completionStatus, tas
     const that = this;
     edit(name,desc,dateA,dateToBeC,dateC,completionStatus,tasks)
     //private 'helper' methods
-    function _allTasksComplete() { if(!that.completionStatus)return false;tasks.forEach(task => {if(!task.getTaskData().completionStatus) return false;});return true; }
-    function _getAllTasksData() { let temp = []; that.tasks.forEach(task => { temp.push(task.getTaskData()); }); return temp; };
+    function _allTasksComplete() { if(!that.completionStatus)return false;tasks.forEach(task => {if(!task.getData().completionStatus) return false;});return true; }
+    function _getAllTasksData() { let temp = []; that.tasks.forEach(task => { temp.push(task.getData()); }); return temp; };
     function _onTrack() { return compareAsc(new Date(), that.dateToBeC) == 1 ? false : true };
 
 
     //public methods
-    function findTaskByName(name) { for(let i = 0; i < that.tasks.length; i++) { if(that.tasks[i].getTaskData().name == name) return i; } return -1; };
+    function findTaskByName(name) { for(let i = 0; i < that.tasks.length; i++) { if(that.tasks[i].getData().name == name) return i; } return -1; };
     function addTask(task) { if(findTaskByName(task.name) == -1) that.tasks.push(task); };
     function remTask(index) { return that.tasks.splice(index,1); };
     
@@ -28,7 +28,7 @@ const Goal = function(name, desc, dateA, dateToBeC, dateC, completionStatus, tas
         return _onTrack() ? timeSinceAdded/totalTimeNeeded : 1;
     }
     
-    function getGoalData() {
+    function getData() {
         return {name: that.name, desc: that.desc, dateA: that.dateA, 
             dateToBeC: that.dateToBeC, 
             dateC: that.dateC, completionStatus: that.completionStatus, tasks: _getAllTasksData()}
@@ -54,7 +54,7 @@ const Goal = function(name, desc, dateA, dateToBeC, dateC, completionStatus, tas
         that.completionStatus = completionStatus;
         that.tasks = tasks;
     }
-    return {getGoalData, edit, expectedProgress, addTask, toggleCompletion, setAllTasksCompletion, findTaskByName, remTask};
+    return {getData, edit, expectedProgress, addTask, toggleCompletion, setAllTasksCompletion, findTaskByName, remTask};
 }
 
 export default Goal;

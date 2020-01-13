@@ -10,7 +10,7 @@ const Task = function(name, dateA, dateToBeC, dateC, completionStatus, subTasks 
     const that = this;
     edit(name,dateA,dateToBeC,dateC,completionStatus,subTasks)
 
-    const setCompletionStatus = (newValue) => that.completionStatus = newValue;
+    const setCompletionStatus = (newValue) => {that.completionStatus = newValue;that.subTasks.foreach(subTask => subTask.setCompletionStatus(true));};
     const toggleCompletion = function() { that.completionStatus = !completionStatus; };
     const onTrack = () => { compareAsc(new Date(), that.dateToBeC) == 1 ? false : true };
     function addSubTask(task) { subTasks.push(task); };
@@ -18,11 +18,11 @@ const Task = function(name, dateA, dateToBeC, dateC, completionStatus, subTasks 
     function _getAllSubTasksData() {
         let temp = [];
         that.subTasks.forEach(subTask => {
-            temp.push(subTask.getTaskData());
+            temp.push(subTask.getData());
         });
         return temp;
     }
-    const getTaskData = function() {
+    const getData = function() {
         return {name: that.name, dateA: that.dateA,
                 dateToBeC: that.dateToBeC, 
                 dateC: that.dateC, completionStatus: that.completionStatus, subTasks: _getAllSubTasksData()} 
@@ -35,7 +35,7 @@ const Task = function(name, dateA, dateToBeC, dateC, completionStatus, subTasks 
         that.completionStatus = completionStatus;
         that.subTasks = subTasks;
     }
-    return {toggleCompletion, onTrack, edit, getTaskData, addSubTask, hasSubTasks, getSubTasks: () => that.subTasks, setCompletionStatus};
+    return {toggleCompletion, onTrack, edit, getData, addSubTask, hasSubTasks, getSubTasks: () => that.subTasks, setCompletionStatus};
 }
 
 export default Task;

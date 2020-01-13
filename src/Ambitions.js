@@ -10,18 +10,13 @@ const Ambitions = function(ambitions) {
     const that = this;
     that.storage = UserStorage;
     _load(ambitions);
-    
-
-    function _genSaveString(ambitions = that.ambitions) {
-        JSON.stringify(ambitions.getData());
-    }
 
     function _parseJSON(ambitions) {
         ambitions.forEach(item => {
             if(!!item.goals){
                 //ambition
                 let tempAmbition = new Ambition(item.name, item.desc, new Date(item.dateA),
-                    new Date(item.dateC), item.completionStatus, _parseJSON(item.gaols));
+                    new Date(item.dateC), item.completionStatus, _parseJSON(item.goals));
                 that.ambitions.push(tempAmbition);
             }else if(!!item.tasks) {
                 //goal
@@ -32,49 +27,62 @@ const Ambitions = function(ambitions) {
                 //task
                 let tempTask = new Task(item.name, new Date(item.dateA), new Date(item.dateToBeC),
                     new Date(item.dateC), item.completionStatus, _parseJSON(item.subTasks));
+                return tempTask;
             }
         })
     }
     
-    function _save() {
-        that.storage.save('ambitions', _genSaveString)
-    }
-
     function _load(ambitions) {
         let a = that.storage.load('ambitions');
-        console.log('here')
         that.ambitions = []; 
-        if(!!ambitions.length){
-            that.ambitions=ambitions;
+        _save();
+        if(!!ambitions && !!ambitions.length){
+            that.ambitions=ambitions.slice(0); //if instantiated with an ambitions object, set the ambitions array to a copy of it.
             return;
         }
-        else if(!!ambitions.goals){
-            that.ambitions.push(ambitions);
+        else if(!!ambitions && !!ambitions.goals){
+            that.ambitions.push(ambitions.clone()); //if instantiated with an ambition object, add it to the ambitions array.
             return;
         }
-        a = JSON.parse(ambitions);
-        _parseJSON(a);
+        else if(a!=null && a!=undefined) {//otherwise, laod the ambition objects from localstorage
+            if(that.ambitions.length != 0){
+                a = JSON.parse(ambitions);
+                _parseJSON(a);
+            }
+            else 
+                _parseJSON([]);
+        }else {
+            _save();
+        }
     }
 
-    function getIndex(a) { 
+    function getIndex(name) { 
         for(let i = 0; i < that.ambitions.length; i++)
-            if(ambition.getAmbitionData().name == a.getAmbitionData().name)
+            if(ambitions[i].getData().name == name)
                 return i;
         return -1;
     }
+
+    function replacebyName(name, newAmbition) {
+        that.ambitions[getIndex(name)] = newAmbition;
+    }
+
+    function _save() { that.storage.save('ambitions', _genSaveString()) };
+    function _genSaveString() { JSON.stringify(getData()) };
     function get(index) { return that.ambitions[index] };
     function insert(pos, ambition) { if(getIndex(ambition) == -1){that.ambitions.insert(pos, ambition);_save();return true;}return false; }
     function swap(pos1, pos2) { if(Math.max(pos1,pos2)>=that.ambitions.length || Math.min(pos1,pos2)<0)return;let temp = that.ambitions[pos1]; that.ambitions[pos1] = that.ambitions[pos2]; that.ambitions[pos2] = temp;_save(); }
-    function push(ambition) { insert(that.ambitions.length-1, ambition) };
-    function remove(index) { return that.ambitions.splice(index, 1); };
+    function push(ambition) { that.ambitions.push(ambition) };
+    function remove(ambition) { return that.ambitions.splice(getIndex(ambition.getData().name), 1); };
+    function removeByName(name) { return that.ambitions.splice(getIndex(name), 1); };
     function getData() { 
         let temp = {ambitions: []};
         that.ambitions.forEach(ambition => {
-            temp.ambitions.push(ambition.getAmbitionData())
+            temp.ambitions.push(ambition.getData())
         });
         return temp;
     }
 
-    return {push, insert, swap, get, remove, getData, getIndex};
+    return {push, insert, swap, get, remove, removeByName, getData, getIndex};
 }
 export default Ambitions;

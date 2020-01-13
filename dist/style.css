@@ -12,7 +12,7 @@ body .noDisplay {
     position:relative;
 }
 
-body .simplifiedView {
+body .simplifiedView, body .detailedView {
     position:relative;
     top:-5px;
 }
@@ -103,9 +103,13 @@ body #content div:first-child ~div {
     float:left;
 }
 
-#ambitionAdder {
+.simplifiedView div.statusBar {
+    left:12.5px;
+}
+
+#ambitionAdderOverlay {
     position: fixed; /* Sit on top of the page content */
-    display: none; /* Hidden by default */
+    display: block; /* Hidden by default */
     width: 100%; /* Full width (cover the whole page) */
     height: 100%; /* Full height (cover the whole page) */
     top: 0;
@@ -113,23 +117,63 @@ body #content div:first-child ~div {
     right: 0;
     bottom: 0;
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    z-index: 6; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
     border:0;
 }
 
-#ambitionAdder > * {
+#ambitionAdderOverlay > * {
     cursor:auto;
 }
 
-#ambitionAdder div {
+#ambitionAdderOverlay>div {
     position:fixed;
     vertical-align: middle;
-    width:50%;
-    height:30%;
-    left: 25%;
-    top:35%;
+    width:600px;
+    min-height:300px;
+    top:25%;
     background-color:tan;
+    border: 5px solid #3c3c3c;
+}
+
+#ambitionAdderOverlay>div>div {
+    width:100%;
+    min-height:50px;
+    text-align: center;
+    font-size:30pt;
+}
+
+#ambitionAdderOverlay>div>div>input {
+    border: 1px solid black;
+}
+
+#ambitionAdderOverlay>div>div>input:active {
+    width:auto;
+    height:auto;
+}
+
+#ambitionAdderOverlay>div>div>input:focus {
+    min-width:30%;
+    min-height:50px;
+}
+
+#ambitionAdderOverlay>div>div>input[type='checkbox']:focus, #ambitionAdderOverlay>div>div>input[type='checkbox'] {
+    width:40px;
+    height:40px;
+    min-width: auto;
+    min-height: auto;
+}
+
+#ambitionAdderOverlay button {
+    font-size:18pt;
+}
+
+#ambitionAdderOverlay input {
+    outline: -webkit-focus-ring-color auto 0px;
+    background-color: goldenrod;
+    color:black;
+    border:0;
+    font-size:18pt;
 }
 
 #content {
@@ -195,9 +239,13 @@ body #content div:first-child ~div {
     top:0px;
 }
 
+#rightHalf .statusBar {
+    left:12.5px;
+}
+
 #ambitionDates {
     height:90px;
-    margin-top:25px;
+    margin-top:15px;
 }
 
 #ambitionDates div {
@@ -268,4 +316,25 @@ table tr:first-child ~tr{
 
 #addAmbition:hover {
     background-color: goldenrod;
+}
+
+.ambitionViewer {
+    width:500px;
+}
+
+.ambitionViewer #leftHalf>h1, .ambitionViewer #leftHalf>button, .ambitionViewer #leftHalf>div {
+    float:left;
+}
+
+.ambitionViewer #leftHalf>h1 {
+    width:275px;
+}
+
+.ambitionViewer #leftHalf>button, .ambitionViewer #leftHalf>div {
+    width:50px;
+    height:40px;
+}
+
+.ambitionViewer #leftHalf>h4 {
+    display:block;
 }
