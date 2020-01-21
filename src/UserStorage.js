@@ -1,6 +1,3 @@
-import Ambition from "./Ambition";
-import Ambitions from './Ambitions';
-
 const UserStorage = function() {
     const that = this;
     let storage = window.localStorage;

@@ -1,9 +1,7 @@
-//  Easily center any element(s) and not allow the page to
+//  Easily center any selectors and not allow the page to
 //  smush multiple elements together on the same x-axis.
 
-const CenterElement = function(idArrayToCenter) {
-    const that = this;
-    
+const CenterElement = function(idArrayToCenter) {    
     function center() {
         const width = window.innerWidth;
         idArrayToCenter.forEach(selector => {

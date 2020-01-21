@@ -1,4 +1,4 @@
-import createElement from './CreateElement';
+import createElement from './createElement';
 
 const TableViewGenerator = function() {
     const buttonText = "<div class='noDisplay'><button id='addAmbition'>+</button></div>";

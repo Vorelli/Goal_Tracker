@@ -107,7 +107,7 @@ body #content div:first-child ~div {
     left:12.5px;
 }
 
-#ambitionAdderOverlay {
+#taskAdderOverlay {
     position: fixed; /* Sit on top of the page content */
     display: block; /* Hidden by default */
     width: 100%; /* Full width (cover the whole page) */
@@ -122,53 +122,79 @@ body #content div:first-child ~div {
     border:0;
 }
 
-#ambitionAdderOverlay > * {
+#taskAdderOverlay > * {
     cursor:auto;
 }
 
-#ambitionAdderOverlay>div {
+#taskAdderOverlay>div {
     position:fixed;
     vertical-align: middle;
-    width:600px;
+    width:750px;
     min-height:300px;
-    top:25%;
+    top:20%;
     background-color:tan;
     border: 5px solid #3c3c3c;
 }
 
-#ambitionAdderOverlay>div>div {
+#taskAdderOverlay>div>div {
     width:100%;
     min-height:50px;
     text-align: center;
     font-size:30pt;
 }
 
-#ambitionAdderOverlay>div>div>input {
+#taskAdderOverlay>div>div>div {
+    float:left;
+}
+
+#taskAdderOverlay>div>div>div:first-child {
+    width:450px;
+    text-align: left;
+    vertical-align: middle;
+    line-height: 50px;
+    margin:0px 25px;
+    font-size:24pt;
+}
+
+#taskAdderOverlay>div>div input {
     border: 1px solid black;
+    width:200px;
+    float:right;
+    height:40px;
+    margin:4px 48px 4px 0px;
+    padding:0px;
 }
 
-#ambitionAdderOverlay>div>div>input:active {
-    width:auto;
-    height:auto;
+#taskAdderOverlay>div>div input:focus {
+    border-width: 5px;
+    margin:0px 40px 0px 0px;
 }
 
-#ambitionAdderOverlay>div>div>input:focus {
-    min-width:30%;
-    min-height:50px;
+#taskAdderOverlay>div>div input[type='checkbox']:focus {
+    border-width: 1px;
+    margin:4px 48px 4px 0px;
 }
 
-#ambitionAdderOverlay>div>div>input[type='checkbox']:focus, #ambitionAdderOverlay>div>div>input[type='checkbox'] {
+#taskAdderOverlay>div>div input[type='date'] {
+    font-size:16pt;
+}
+
+#taskAdderOverlay>div>div>input:focus {
+    border-width: 5px;
+}
+
+#taskAdderOverlay>div>div>input[type='checkbox']:focus, #taskAdderOverlay>div>div>input[type='checkbox'] {
     width:40px;
     height:40px;
     min-width: auto;
     min-height: auto;
 }
 
-#ambitionAdderOverlay button {
+#taskAdderOverlay button {
     font-size:18pt;
 }
 
-#ambitionAdderOverlay input {
+#taskAdderOverlay input {
     outline: -webkit-focus-ring-color auto 0px;
     background-color: goldenrod;
     color:black;

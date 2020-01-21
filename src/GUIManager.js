@@ -2,25 +2,61 @@ import Listener from './Listener';
 import {grab, grabAll} from './grab';
 import CenterElement from './CenterElement';
 import { formatISO8601, isFuture } from 'date-fns';
+import ViewGenerator from "./ViewGenerator";
+import BlockViewGenerator from "./BlockViewGenerator";
+import TableViewGenerator from "./TableViewGenerator";
 
+
+//manages user input and then triggers outside events for the underlying logic
 const GUIManager = function() {
     let sidebarOff = true;
     const defaultTopbarLeftMargin = 75;
-    let center = new CenterElement(['#content', '#ambitionAdderOverlay>div']);
+    let center = new CenterElement(['#content', '#taskAdderOverlay>div']);
+    let simpViewGen = new ViewGenerator();
+    let blockViewGen = new BlockViewGenerator(Listener);
     addListeners()
 
     function addListeners() {
-        Listener.addListener('clear', _clear);
-        Listener.addListener('toggleAddAmbitionOverlay', _toggleAddAmbitionOverlay);
-        Listener.addListener('toggleSidebar', _toggleSidebar);
-        Listener.addListener('loadAmbitionTable', _loadAmbitionTable);
-        Listener.addListener('addAmbitionGUI', _addAmbition)
-        Listener.addListener('editAmbitionPopup', _toggleAddAmbitionOverlay)
-        Listener.addListener('center', center.center);
+        Listener.addListener(undefined, 'clearContent', _clearContent);
+        Listener.addListener(undefined, 'toggleSidebar', _toggleSidebar);
+        Listener.addListener(undefined, 'loadAmbitionTable', _loadAmbitionTable);
+        Listener.addListener(undefined, 'addAmbitionGUI', _addAmbition)
+        Listener.addListener(undefined, 'center', center.center);
+        Listener.addListener(undefined, 'generateSimplifiedView', _generateSimplifiedView);
+        Listener.addListener(undefined, 'generateBlockView', _generateBlockView);
+        Listener.addListener(undefined, 'generateTableView', _generateTableView);
     }
 
-    function _clear() {
-        grab('#content').innerHTML = '';
+    function _toggleSidebar() {
+        grab('#hamburgerIcon img').src = sidebarOff ? 'menuClose.png' : 'menuOpen.png';
+        grab('#sidebar').style.width = sidebarOff ? 250+'px' : 60+'px'
+        grab('#ambitionTableIcon a').textContent = sidebarOff ? "Ambitions" : "A";
+        grab('#habitTrackerIcon a').textContent = sidebarOff ? "Habits" : "H";
+        grab('#dailyScheduleIcon a').textContent = sidebarOff ? "Schedule" : "S";
+        grabAll('#sidebar div').forEach(element => { element.style.width = sidebarOff ? '250px' : '60px' })
+        grab('#topbar div').style.marginLeft = sidebarOff ? defaultTopbarLeftMargin+190+'px' : defaultTopbarLeftMargin +'px';
+        sidebarOff = !sidebarOff;
+    }
+
+    function _loadAmbitionTable(){
+        _clearContent();
+        let tasks = Listener.trigger('getTasks');
+        simpViewGen.generateSimplifiedView(tasks);
+        Listener.trigger('center');
+    }
+
+    function _clearContent() { grab('#content').innerHTML = ''; };
+
+    function _generateBlockView(ambition) {
+        console.log(ambition);
+    }
+
+    function _generateTableView(ambition) {
+        console.log(ambition);
+    }
+
+    function _generateSimplifiedView(ambition) {
+        console.log(ambition);
     }
 
     function _addAmbition() {
@@ -46,7 +82,7 @@ const GUIManager = function() {
     function _toggleAddAmbitionOverlay(args) {
         let ambition = !!args ? args[0]: undefined;
         let isEditing = ambition && ambition.path && ambition.path[0].textContent == 'E';
-        let isAmbition = ambition && ambition.name!=undefined && ambition.desc!=undefined;
+        let isAmbition = ambition && !!ambition.name && !!ambition.desc;
         if(!isAmbition && ambition && ambition.path && ambition.path[0].ambition) {
             grab('#ambitionAdderOverlay').editingBlockView = isEditing ? ambition.path[0].parentNode.parentNode.parentNode.parentNode : undefined;
             ambition = ambition.path[0].ambition;
@@ -67,24 +103,6 @@ const GUIManager = function() {
 
         grab('#ambitionAdderOverlay').style.display = goingToBeVisible ? 'block' : 'none';
         Listener.trigger('center');
-    }
-
-    function _loadAmbitionTable(){
-        _clear();
-        Listener.trigger('generateSimplifiedView');
-        Listener.trigger('center');
-        grab('#addAmbition').addEventListener('click', _toggleAddAmbitionOverlay);
-    }
-
-    function _toggleSidebar (event) {
-        grab('#hamburgerIcon img').src = sidebarOff ? 'menuClose.png' : 'menuOpen.png';
-        grab('#sidebar').style.width = sidebarOff ? 250+'px' : 60+'px'
-        grab('#ambitionTableIcon a').textContent = sidebarOff ? "Ambitions" : "A";
-        grab('#habitTrackerIcon a').textContent = sidebarOff ? "Habits" : "H";
-        grab('#dailyScheduleIcon a').textContent = sidebarOff ? "Schedule" : "S";
-        grabAll('#sidebar div').forEach(element => { element.style.width = sidebarOff ? '250px' : '60px' })
-        grab('#topbar div').style.marginLeft = sidebarOff ? defaultTopbarLeftMargin+190+'px' : defaultTopbarLeftMargin +'px';
-        sidebarOff = sidebarOff ? false : true;
     }
 }()
 export default GUIManager;

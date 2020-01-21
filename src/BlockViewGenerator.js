@@ -1,4 +1,4 @@
-import createElement from './CreateElement';
+import createElement from './createElement';
 import { grabFrom } from './grab';
 import { formatISO9075 } from 'date-fns';
 import { generateFilledDot, generateDot } from './dots';
@@ -6,7 +6,7 @@ import { generateFilledDot, generateDot } from './dots';
 const BlockViewGenerator = function(listener) {
     const that = this;
     that.l = listener;
-    that.ambitionViewerText = "<div class='ambitionViewer'> <div id='leftHalf'> <button>Back</button> <h1>Ambition Name</h1> <div></div> <h4>Ambition Discription/Notes Section</h4> </div> <div id='rightHalf'> <div id='ambitionButtons'> <div class='ambitionButtons completeButton'>U</div> <div class='ambitionButtons editButton'>E</div> <div class='ambitionButtons deleteButton'>D</div> </div> <div class='statusBar ambitionStatus'> </div> <div id='ambitionDates'> <div>Started:<br></div> <div class='ambitionStartDate ambitionDate'>09/25/2019</div> <div>Completed:<br></div> <div class='ambitionCompDate ambitionDate'>10/12/2019</div> </div> </div> </div>";    
+    that.ambitionViewerText = "<div class='ambitionViewer'> <div id='leftHalf'> <button>Back</button> <h1 class='name'>Ambition Name</h1> <div></div> <h4 class='desc'>Ambition Discription/Notes Section</h4> </div> <div id='rightHalf'> <div id='ambitionButtons'> <div class='ambitionButtons completeButton'>U</div> <div class='ambitionButtons editButton'>E</div> <div class='ambitionButtons deleteButton'>D</div> </div> <div class='statusBar ambitionStatus'> </div> <div id='ambitionDates'> <div>Started:<br></div> <div class='ambitionStartDate ambitionDate'>09/25/2019</div> <div>Completed:<br></div> <div class='ambitionCompDate ambitionDate'>10/12/2019</div> </div> </div> </div>";    
 
 
     function generateAmbitionViewer(args) {
