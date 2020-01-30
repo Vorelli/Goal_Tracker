@@ -2,7 +2,6 @@ import Task from './Task';
 import InterfaceLoad from './InterfaceLoad';
 import Listener from './Listener';
 import GoalTrackerManager from './GoalTrackerManager';
-import GUIManager from './GUIManager';
 
 let iL = new InterfaceLoad(Listener);
 
@@ -42,4 +41,4 @@ console.log(b.level());
 
 
 
-window.onresize = Listener.trigger.bind('center');
+window.onresize = Listener.trigger.bind(this, 'center');

@@ -22,7 +22,7 @@ TaskAdderOverlayManager.prototype.setValues = function setValues(name, desc, dat
         name = name.name;
     } else {
         dateS = !isNaN(Date.parse(dateS)) ? _toDate(dateS) : "Not Set";
-        dateExpected = !isNaN(Date.parse(name.dateExpected)) ? _toDate(dateExpected) : "Not Set";
+        dateExpected = !isNaN(Date.parse(dateExpected)) ? _toDate(dateExpected) : "Not Set";
         dateC = !isNaN(Date.parse(dateC)) ? _toDate(dateC) : "Not Set";
     }
     grabFrom(this.overlay, '#name input').value = name;

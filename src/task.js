@@ -41,15 +41,15 @@ Task.prototype.getData = function getData() {
 //returns a value between 0 and 1 depending on the percent of
 //time passing from dateS to dateExpected
 Task.prototype.progress= function progress() {
-    if(new Date().getTime() < this.dateS.getTime()) return 0;
-    let timeSinceAdded = new Date().getTime()-this.dateS.getTime();
-    let totalTimeNeeded = this.dateExpected.getTime()-this.dateS.getTime();
+    if(new Date().getTime() < new Date(this.dateS).getTime()) return 0;
+    let timeSinceAdded = new Date().getTime()-new Date(this.dateS).getTime();
+    let totalTimeNeeded = new Date(this.dateExpected).getTime()-new Date(this.dateS).getTime();
     return this._withinTimeFrame() ? timeSinceAdded/totalTimeNeeded : 1;
 }
 
 //if right now is before dateExpected, return true;
 Task.prototype._withinTimeFrame = function _withinTimeFrame() {
-    return ((new Date()).getTime()) < this.dateExpected.getTime();
+    return ((new Date()).getTime()) < new Date(this.dateExpected).getTime();
 }
 
 //Returns true or false depending if the task is 'on track' for completion 
@@ -60,9 +60,9 @@ Task.prototype._withinTimeFrame = function _withinTimeFrame() {
 //Add up all the weights, then based on that number, calculate the
 //expected weighting to be completed
 Task.prototype.onTrack = function onTrack() {
-    let numTasks = this.subTasks.length + 1;
-    let expectedCompletedTasks = Math.floor((this.progress() * numTasks)) + this.completionStatus ? 1 : 0;
-    let numCompleted = this.completionStatus ? 1 : 0;
+    let numTasks = this.subTasks.length;
+    let expectedCompletedTasks = Math.floor((this.progress() * numTasks));
+    let numCompleted = 0;
     this.subTasks.forEach(subTask => {if(subTask.getCompletionStatus()) numCompleted++;});
     return numCompleted >= expectedCompletedTasks;
 }
@@ -79,6 +79,17 @@ Task.prototype.setCompletionStatus = function setCompletionStatus(newValue) {
     this.completionStatus = newValue;
     this.dateC = newValue ? new Date() : null;
     this.subTasks.forEach(subTask => {if(subTask.completionStatus!=newValue) { subTask.completionStatus = newValue; subTask.dateC = newValue ? new Date() : null; } } );
+}
+
+Task.prototype.getCompletionStatus = function getCompletionStatus() {
+    let compStatus = true;
+    this.subTasks.forEach(subTask => {
+        if(!subTask.getCompletionStatus())
+            compStatus = false;
+    })
+    if(!this.completionStatus)
+        compStatus = false;
+    return compStatus;
 }
 
 Task.prototype.hasSubTasks = function hasSubTasks() {
@@ -117,7 +128,7 @@ Task.prototype.addSubTask = function addSubTask(subTask) {
 //returns found subTask's index
 Task.prototype.findSubTask = function findSubTask(name) {
     for(let i = 0; i < this.subTasks.length; i++) {
-        if(name == this.subTasks[i].name) return s
+        if(name == this.subTasks[i].name) return i;
     }
     return -1;
 }

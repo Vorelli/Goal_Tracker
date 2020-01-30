@@ -1,5 +1,6 @@
 import UserStorage from './UserStorage';
 import Listener from './Listener';
+import Task from './Task';
 
 function taskStorage() {
     this.tasks = [];
