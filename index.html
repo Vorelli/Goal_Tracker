@@ -1,37 +1,47 @@
 <!DOCTYPE html>
 <html>
+  <head> </head>
 
-<head>
-    <link type='text/css' rel='stylesheet' href='reset.css'>
-    <link type='text/css' rel='stylesheet' href='style.css'>
-    <link type='text/css' rel='stylesheet' href='dots.css'>
-</head>
-
-<body>
-    <div id='sidebar'>
-        <div id='hamburgerIcon'><img src="menuOpen.png"></div>
-        <div id='ambitionTableIcon'><a>A</a></div>
-        <div id='habitTrackerIcon'><a>H</a></div>
-        <div id='dailyScheduleIcon'><a>S</a></div>
+  <body>
+    <div id="sidebar">
+      <div id="hamburgerIcon"><img src="menuOpen.png" /></div>
+      <div id="ambitionTableIcon"><a>A</a></div>
+      <div id="habitTrackerIcon"><a>H</a></div>
+      <div id="dailyScheduleIcon"><a>S</a></div>
     </div>
-    <div id='topbar'>
-        <div style="margin-left: 75px;">Meet Your Goals!</div>
+    <div id="topbar">
+      <div style="margin-left: 75px;">Meet Your Goals!</div>
     </div>
-    <div id='taskAdderOverlay' style='display:none'>
-        <div id='taskAdder'>
-            <div id='name'><div>Name:</div><div><input type=text></div></div>
-            <div id='desc'><div>Description/Notes:</div><div><input type="text"></div></div>
-            <div id='dateS'><div>Date Started:</div><div><input type="date"></div></div>
-            <div id='dateC'><div>Date Completed:</div><div><input type='date'></div></div>
-            <div id='dateExpected'><div>Date Expected to be Completed:</div><div><input type='date'></div></div>
-            <div id='completionStatus'><div>Completion Status:</div><div><input type="checkbox"></div></div>
-            <div><button>Add</button></div>
+    <div id="taskAdderOverlay" style="display:none">
+      <div id="taskAdder">
+        <div id="name">
+          <div>Name:</div>
+          <div><input type="text" /></div>
         </div>
+        <div id="desc">
+          <div>Description/Notes:</div>
+          <div><input type="text" /></div>
+        </div>
+        <div id="dateS">
+          <div>Date Started:</div>
+          <div><input type="date" /></div>
+        </div>
+        <div id="dateC">
+          <div>Date Completed:</div>
+          <div><input type="date" /></div>
+        </div>
+        <div id="dateExpected">
+          <div>Date Expected to be Completed:</div>
+          <div><input type="date" /></div>
+        </div>
+        <div id="completionStatus">
+          <div>Completion Status:</div>
+          <div><input type="checkbox" /></div>
+        </div>
+        <div><button>Add</button></div>
+      </div>
     </div>
-    <div id='content'>
-
-    </div>
-    <script src='main.js'></script>
-</body>
-
+    <div id="content"></div>
+    <script src="main.js"></script>
+  </body>
 </html>
