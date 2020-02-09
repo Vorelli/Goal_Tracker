@@ -405,7 +405,8 @@ function ViewGenerator() {
       row.querySelector("button") == undefined
     )
       process = _returnToSimplified;
-    if (row.parentNode.children[0].colSpan == 6) process = _createTableRow;
+    if (row.parentNode.children[0].cells[0].colSpan == 6)
+      process = _createTableRow;
     else process = _createDetailedView;
     process(task);
   }

@@ -68,7 +68,7 @@ const GUIManager = (function() {
             toggleSidebarSettings.forEach(setting => { grab(setting.option)[setting.value]=setting.onValue })
             grabAll('#sidebar div').forEach(element => { element.style.width = '60px'; });
         }*/
-    if (sidebarOff) {
+    if ((sidebarOff = !sidebarOff)) {
       //changed from a bunch of ternary statements for efficiency
       grabAll("#sidebar div").forEach(element => {
         element.style.width = "250px";
@@ -88,7 +88,6 @@ const GUIManager = (function() {
         element.style.width = "60px";
       });
     }
-    sidebarOff = !sidebarOff;
   }
 
   function _loadAmbitionTable() {
