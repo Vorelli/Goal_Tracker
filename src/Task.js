@@ -135,7 +135,7 @@ Task.prototype.findSubTask = function findSubTask(name) {
 
 //looks for subtask by name (can only be one of each) and if it exists, removes and returns it
 Task.prototype.removeSubTask = function removeSubTask(name) {
-    let index = this.findSubTask(subTask);
+    let index = this.findSubTask(name);
     if(index >= 0)
         return this.subTasks.splice(index, 1);
     return null;

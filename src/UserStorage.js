@@ -1,16 +1,15 @@
-const UserStorage = function() {
-    const that = this;
-    let storage = window.localStorage;
+const UserStorage = (function() {
+  let storage = window.localStorage;
 
-    function load(key) {
-        return storage.getItem(key);
-    }
+  function load(key) {
+    return storage.getItem(key);
+  }
 
-    function save(key, value) {
-        storage.setItem(key, value)
-    }
-    
-    return {save, load};
-}();
+  function save(key, value) {
+    storage.setItem(key, value);
+  }
+
+  return { load, save };
+})();
 
 export default UserStorage;
