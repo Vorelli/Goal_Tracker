@@ -2,19 +2,22 @@ import Listener from "./Listener";
 import { grab, grabAll } from "./grab";
 import CenterElement from "./CenterElement";
 import ViewGenerator from "./ViewGenerator";
+import closeMenu from "./menuClose.png";
+import openMenu from "./menuOpen.png";
 
 let sidebarOff = false;
 let defaultTopbarLeftMargin = 75;
 let center = new CenterElement(["#content", "#taskAdderOverlay>div"]);
 let viewGenerator = new ViewGenerator();
 
+grab("#hamburgerIcon img").src = openMenu;
 let content = grab("#content");
 let toggleSidebarSettings = [
   {
     option: "#hamburgerIcon img",
     value: "src",
-    offValue: "menuClose.png",
-    onValue: "menuOpen.png"
+    offValue: closeMenu,
+    onValue: openMenu
   },
   {
     option: "#sidebar",

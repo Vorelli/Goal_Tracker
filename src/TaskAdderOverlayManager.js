@@ -5,6 +5,11 @@ import _toDate from "./toDateString";
 
 function TaskAdderOverlayManager() {
   this.overlay = document.querySelector("body>#taskAdderOverlay");
+  this.overlay.addEventListener("click", event => {
+    if (event.target == this.overlay) {
+      this.toggleOverlay();
+    }
+  });
 }
 
 TaskAdderOverlayManager.prototype.setValues = function setValues(
@@ -48,9 +53,10 @@ TaskAdderOverlayManager.prototype.setValues = function setValues(
   grabFrom(this.overlay, "#completionStatus input").checked = completionStatus;
 };
 
-TaskAdderOverlayManager.prototype.toggleOverlay = function toggleOverlay() {
-  this.overlay.style.display =
-    this.overlay.style.display == "block" ? "none" : "block";
+TaskAdderOverlayManager.prototype.toggleOverlay = function toggleOverlay(
+  value = this.overlay.style.display
+) {
+  this.overlay.style.display = value == "block" ? "none" : "block";
   Listener.trigger("center");
 };
 

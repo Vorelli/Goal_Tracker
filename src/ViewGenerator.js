@@ -57,10 +57,6 @@ function ViewGenerator() {
       thisVar: undefined
     }
   ];
-  tAOM.overlay.addEventListener("click", event => {
-    if (event.target == document.querySelector("div#taskAdderOverlay"))
-      tAOM.toggleOverlay();
-  });
   Listener.addListener(this, "submitNewTask", submitNewTask);
   Listener.addListener(this, "submitEdit", submitEdit);
 
