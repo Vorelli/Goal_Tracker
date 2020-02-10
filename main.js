@@ -891,6 +891,11 @@ function _toDate(date) {
 
 function TaskAdderOverlayManager() {
   this.overlay = document.querySelector("body>#taskAdderOverlay");
+  this.overlay.addEventListener("click", event => {
+    if (event.target == this.overlay) {
+      this.toggleOverlay();
+    }
+  });
 }
 
 TaskAdderOverlayManager.prototype.setValues = function setValues(
@@ -934,9 +939,10 @@ TaskAdderOverlayManager.prototype.setValues = function setValues(
   grabFrom(this.overlay, "#completionStatus input").checked = completionStatus;
 };
 
-TaskAdderOverlayManager.prototype.toggleOverlay = function toggleOverlay() {
-  this.overlay.style.display =
-    this.overlay.style.display == "block" ? "none" : "block";
+TaskAdderOverlayManager.prototype.toggleOverlay = function toggleOverlay(
+  value = this.overlay.style.display
+) {
+  this.overlay.style.display = value == "block" ? "none" : "block";
   src_Listener.trigger("center");
 };
 
@@ -1034,10 +1040,6 @@ function ViewGenerator() {
       thisVar: undefined
     }
   ];
-  tAOM.overlay.addEventListener("click", event => {
-    if (event.target == document.querySelector("div#taskAdderOverlay"))
-      tAOM.toggleOverlay();
-  });
   src_Listener.addListener(this, "submitNewTask", submitNewTask);
   src_Listener.addListener(this, "submitEdit", submitEdit);
 
@@ -1450,7 +1452,13 @@ function ViewGenerator() {
 }
 /* harmony default export */ var src_ViewGenerator = (ViewGenerator);
 
+// CONCATENATED MODULE: ./src/menuClose.png
+/* harmony default export */ var menuClose = (__webpack_require__.p + "551ea39a22949759e507a028f667bdf9.png");
+// CONCATENATED MODULE: ./src/menuOpen.png
+/* harmony default export */ var menuOpen = (__webpack_require__.p + "b5098bdc9dbca453e84481d78ff45085.png");
 // CONCATENATED MODULE: ./src/GUIManager.js
+
+
 
 
 
@@ -1461,13 +1469,14 @@ let defaultTopbarLeftMargin = 75;
 let center = new src_CenterElement(["#content", "#taskAdderOverlay>div"]);
 let viewGenerator = new src_ViewGenerator();
 
+grab("#hamburgerIcon img").src = menuOpen;
 let content = grab("#content");
 let toggleSidebarSettings = [
   {
     option: "#hamburgerIcon img",
     value: "src",
-    offValue: "menuClose.png",
-    onValue: "menuOpen.png"
+    offValue: menuClose,
+    onValue: menuOpen
   },
   {
     option: "#sidebar",
